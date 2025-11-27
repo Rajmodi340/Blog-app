@@ -16,8 +16,14 @@ import validator from "validator"
         unique:true,
     },
     photo:{
+       public_id:{
         type:String,
-        
+        required:true
+       },
+       url:{
+        type:String,
+        required:true
+       }
     },
     education:{
         type:String,
@@ -40,4 +46,4 @@ import validator from "validator"
     }
 
  })
- export default  User=mongoose.model("User",schema);
+ export  const User=mongoose.model("User",schema);
