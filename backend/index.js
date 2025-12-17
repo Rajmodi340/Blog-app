@@ -3,10 +3,14 @@ import dotenv from "dotenv"
 import { v2 as cloudinary } from "cloudinary";
 import mongoose from "mongoose"
 import router from "./routes/route.js"
+import blogrouter from "./routes/blog-route.js";
 import fileUpload from "express-fileupload"
+import cookieParser from "cookie-parser";
+
 dotenv.config();
 const app=express();
 app.use(express.json());
+app.use(cookieParser());
 app.use(fileUpload({
     useTempFiles:true,
     tempFileDir:"/tmp/"
@@ -19,6 +23,7 @@ try{
 }
 
 app.use("/api/user",router);
+app.use("/api/blog",blogrouter);
 // cloudinary
 cloudinary.config({
   cloud_name: process.env.CLOUD_NAME,
