@@ -6,11 +6,27 @@ import router from "./routes/route.js"
 import blogrouter from "./routes/blog-route.js";
 import fileUpload from "express-fileupload"
 import cookieParser from "cookie-parser";
-
+import cors from "cors";
 dotenv.config();
 const app=express();
 app.use(express.json());
 app.use(cookieParser());
+const allowedOrigins = [
+  process.env.FRONTED_URL,          // your configured env value
+  'http://localhost:5173',
+  'http://localhost:5174'
+];
+
+app.use(cors({
+  origin: function(origin, callback) {
+    // allow requests with no origin (like mobile apps, curl, Postman)
+    if (!origin) return callback(null, true);
+    if (allowedOrigins.includes(origin)) return callback(null, true);
+    callback(new Error('Not allowed by CORS'));
+  },
+  credentials: true,
+  methods: ["GET","POST","PUT","DELETE"],
+}));
 app.use(fileUpload({
     useTempFiles:true,
     tempFileDir:"/tmp/"

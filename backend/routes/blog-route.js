@@ -8,8 +8,8 @@ import { updateBlog } from "../controllers/blogcontroller.js"
 const blogrouter = express.Router()
 blogrouter.post("/createblog",isauth,isAdmin("admin"),createblog)
 blogrouter.delete("/deleteblog/:id",isauth,isAdmin("admin"),deleteblog)
-blogrouter.get("/getblog",isauth,getAllblog)
-blogrouter.get("/singleblog/:id",isauth,getsingleBlogs)
+blogrouter.get("/getblog",getAllblog)
+blogrouter.get("/singleblog/:id",getsingleBlogs)
 blogrouter.get("/myblogs",isauth,isAdmin("admin"),getMyBlogs)
 blogrouter.put("/updateblog/:id",isauth,isAdmin("admin"),updateBlog)
 export default blogrouter
