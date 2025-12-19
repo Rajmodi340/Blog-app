@@ -32,9 +32,14 @@ reader.onload=()=>{
     formData.append("education", education);
     formData.append("photo", photo);
     try{
-const {data}=await axios.post("http://localhost:3003/api/user/register",formData);
+const {data}=await axios.post("http://localhost:3003/api/user/register",formData,{
+    withCredentials:true,
+    headers:{
+        "Content-Type":"multipart/form-data"
+    }
+});
 console.log("response from register",data);
-alert("Registered Successfully");
+alert(data.message||"Registered Successfully");
  
       setName("");
       setEmail("");
@@ -47,6 +52,7 @@ alert("Registered Successfully");
     }
     catch(error){
         console.log("error while registering user",error);
+        alert(error.response.data.message||"Something went wrong");
     }
     }
   return (
