@@ -32,6 +32,7 @@ import mongoose from "mongoose"
     adminPhoto:{
          type:String,
         // required:true
+         
     },
     createdBy:{
         type:mongoose.Schema.Types.ObjectId,

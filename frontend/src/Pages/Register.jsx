@@ -2,6 +2,7 @@ import React from 'react'
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
+import { toast } from 'react-hot-toast';
 function Register() {
     const [name, setName] = useState("");
   const [email, setEmail] = useState("");
@@ -39,7 +40,7 @@ const {data}=await axios.post("http://localhost:3003/api/user/register",formData
     }
 });
 console.log("response from register",data);
-alert(data.message||"Registered Successfully");
+toast.success(data.message||"Registered Successfully");
  
       setName("");
       setEmail("");
@@ -52,7 +53,7 @@ alert(data.message||"Registered Successfully");
     }
     catch(error){
         console.log("error while registering user",error);
-        alert(error.response.data.message||"Something went wrong");
+        toast.error(error.response.data.message||"Something went wrong");
     }
     }
   return (

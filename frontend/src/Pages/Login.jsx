@@ -2,6 +2,7 @@ import React from 'react'
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
+import { toast } from 'react-hot-toast';
 function Login() {
     
   const [email, setEmail] = useState("");
@@ -24,7 +25,7 @@ const {data}=await axios.post("http://localhost:3003/api/user/login",{email,phon
     }
 });
 console.log("response from login",data);
-alert(data.message||"Login Successfully");
+toast.success(data.message||"Login Successfully");
 
       
       setEmail("");
@@ -35,7 +36,7 @@ alert(data.message||"Login Successfully");
     }
     catch(error){
         console.log("error while logging in user",error);
-        alert(error.response.data.message||"Something went wrong");
+        toast.error(error.response.data.message||"Something went wrong");
     }
     }
   return (

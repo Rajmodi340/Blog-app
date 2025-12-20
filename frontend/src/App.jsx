@@ -11,6 +11,7 @@ import Creater from './Pages/Creater'
 import Register from './Pages/Register'
 import Dashboard from './Pages/Dashboard'
 import { useAuth } from './context/Authprovider'
+import { Toaster } from "react-hot-toast";
 function App() {
   const location = useLocation()
   const hiddennavfot=["/login","/register","/dashboard"].includes(location.pathname)
@@ -30,6 +31,7 @@ function App() {
       <Route  exact path="/register" element={<Register></Register>}></Route>
       <Route  exact path="/dashboard" element={<Dashboard></Dashboard>}></Route>
       </Routes>
+      <Toaster></Toaster>
       {!hiddennavfot && <Footer></Footer>}
 </div>
 

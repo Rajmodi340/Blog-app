@@ -20,7 +20,7 @@ export const createblog = async (req, res) => {
         .json({ message: "title, category & about are required fields" });
     }
     const adminName = req?.user?.name;
-    const adminPhoto = req?.user?.photo;
+    const adminPhoto = req?.user?.photo.url;
     const createdBy = req?.user?._id;
 
     const uploaded = await cloudinary.uploader.upload(blogImage.tempFilePath);
@@ -72,7 +72,8 @@ return res.status(200).json({message:"Blog deleted successfully"});
   }
 }
 export const getAllblog=async(req,res)=>{
-  const allblogs=await Blog.find()
+  // return newest blogs first
+  const allblogs=await Blog.find().sort({ _id: -1 })
   res.status(200).json({blogs:allblogs})
 }
 export const getsingleBlogs = async (req, res) => {
